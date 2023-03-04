@@ -9,7 +9,7 @@
     <!-----------------------
             x-icon
     ------------------------->
-    <link rel="icon" type="x-icon" href="./images/1670521590918.png">
+    <link rel="icon" type="x-icon" href="./images/Untitled-1.png">
 
     <!-----------------------
             tailwind
@@ -32,7 +32,7 @@
     <header class="mt-9 mb-14">
         <h1 class="font-semibold text-center text-5xl">AI Universe Hub</h1>
         <div class="flex justify-center mt-7">
-            <button class="bg-red-400 hover:bg-red-600 px-4 text-lg py-3 rounded-xl text-white font-medium">Sort By
+            <button id="sort-by-date-btn" class="bg-red-400 hover:bg-red-600 px-4 text-lg py-3 rounded-xl text-white font-medium">Sort By
                 Date</button>
         </div>
     </header>
@@ -41,14 +41,38 @@
                  cards
         ------------------------->
         <section>
-            <div id="cards-container" class="grid gap-4 lg:grid-cols-3 grid-cols-1">
-                
+            <div id="cards-container" class="grid gap-4 lg:grid-cols-3 md:grid-cols-2 grid-cols-1">
+
+            </div>
+        </section>
+
+        <!-----------------------
+                 modal
+        ------------------------->
+        <section>
+            <div class="modal fade" id="cardDetailModal" tabindex="-1" aria-labelledby="cardDetailModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="cardDetailModalLabel"></h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
             </div>
         </section>
     </main>
     <footer>
         <div class="flex justify-center mt-14 mb-9">
-            <button id="see-more" class="bg-red-400 hover:bg-red-600 px-4 text-lg py-3 rounded-xl text-white font-medium">
+            <button id="see-more"
+                class="bg-red-400 hover:bg-red-600 px-4 text-lg py-3 rounded-xl text-white font-medium">
                 See More
             </button>
         </div>
