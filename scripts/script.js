@@ -72,17 +72,49 @@ const displayCardDetails = card => {
     const pricing = document.getElementById('pricing');
     pricing.innerHTML = `
     <div class="bg-purple-200 font-bold px-6 py-3 rounded-xl flex flex-col justify-center" style="color: #03A30A;">
-        <h3>${card.pricing[0].price === '0' || card.pricing[0].price === 'No cost' ? "Free of Cost" : card.pricing[0].price}</h3>
-        <h3>${card.pricing[0].price === '0' || card.pricing[0].price === 'No cost' ? "" : card.pricing[0].plan}</h3>
+       <a href="${card.website}">
+           <h3>${card.pricing[0].price === '0' || card.pricing[0].price === 'No cost' ? "Free of Cost" : card.   pricing[0].price}</h3>
+           <h3>${card.pricing[0].price === '0' || card.pricing[0].price === 'No cost' ? "" : card.pricing[0].plan}   </h3>
+       </a>
     </div>
     <div class="bg-purple-200 font-bold px-6 py-3 rounded-xl flex flex-col justify-center" style="color: #F28927">
-        <h3>${card.pricing[1].price === '0' || card.pricing[1].price === 'No cost' ? "Free of Cost" : card.pricing[1].price}</h3>
-        <h3>${card.pricing[1].price === '0' || card.pricing[1].price === 'No cost' ? "" : card.pricing[1].plan}</h3>
+       <a href="${card.website}">
+           <h3>${card.pricing[1].price === '0' || card.pricing[1].price === 'No cost' ? "Free of Cost" : card.   pricing[1].price}</h3>
+           <h3>${card.pricing[1].price === '0' || card.pricing[1].price === 'No cost' ? "" : card.pricing[1].plan}   </h3>
+       </a>
     </div>
     <div class="bg-purple-200 font-bold px-6 py-3 rounded-xl flex flex-col justify-center" style="color: #EB5757">
-        <h3>${card.pricing[2].price}</h3>
-        <h3>${card.pricing[2].plan}</h3>
+       <a href="${card.website}">
+           <h3>${card.pricing[2].price}</h3>
+           <h3>${card.pricing[2].plan}</h3>
+       </a>
     </div>
+    `;
+
+    const featuresListItems = card.integrations
+      .filter((feature) => feature)
+      .map(
+        (feature) =>
+          `<li class="text-neutral-500" style="list-style: disc;  margin-left: 1em;">${feature}</li>`
+      )
+      .join("");
+    
+    const featuresIntegrations = document.getElementById('features-integrations');
+    featuresIntegrations.innerHTML = `
+    <div>
+         <h1 class="text-xl font-bold mb-3">Features</h1>
+         <ul class="text-neutral-500" style="list-style: disc; margin-left: 0;">
+           <li style="margin-left: 1em;">${card.features['1']['feature_name']}</li>
+           <li style="margin-left: 1em;">${card.features['2']['feature_name']}</li>
+           <li style="margin-left: 1em;">${card.features['3']['feature_name']}</li>
+         </ul>
+     </div>
+     <div>
+         <h1 class="text-xl font-bold mb-3">Integrations</h1>
+         <ul>
+         ${featuresListItems}
+         </ul>
+     </div>
     `;
 }
 
