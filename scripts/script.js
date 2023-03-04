@@ -62,7 +62,6 @@ const loadCardDetails = async id => {
     const res = await fetch (url);
     const data = await res.json ();
     displayCardDetails(data.data);
-    console.log(data.data)
 }
 
 const displayCardDetails = card => {
@@ -71,20 +70,20 @@ const displayCardDetails = card => {
 
     const pricing = document.getElementById('pricing');
     pricing.innerHTML = `
-    <div class="bg-purple-200 font-bold px-6 py-3 rounded-xl flex flex-col justify-center" style="color: #03A30A;">
-       <a href="${card.website}">
+    <div class="bg-white font-bold px-6 py-3 rounded-xl flex flex-col justify-center" style="color: #03A30A;">
+       <a onclick="removeCardDetails()" href="${card.website}">
            <h3>${card.pricing[0].price === '0' || card.pricing[0].price === 'No cost' ? "Free of Cost" : card.   pricing[0].price}</h3>
            <h3>${card.pricing[0].price === '0' || card.pricing[0].price === 'No cost' ? "" : card.pricing[0].plan}   </h3>
        </a>
     </div>
-    <div class="bg-purple-200 font-bold px-6 py-3 rounded-xl flex flex-col justify-center" style="color: #F28927">
-       <a href="${card.website}">
+    <div class="bg-white font-bold px-6 py-3 rounded-xl flex flex-col justify-center" style="color: #F28927">
+       <a onclick="removeCardDetails()" href="${card.website}">
            <h3>${card.pricing[1].price === '0' || card.pricing[1].price === 'No cost' ? "Free of Cost" : card.   pricing[1].price}</h3>
            <h3>${card.pricing[1].price === '0' || card.pricing[1].price === 'No cost' ? "" : card.pricing[1].plan}   </h3>
        </a>
     </div>
-    <div class="bg-purple-200 font-bold px-6 py-3 rounded-xl flex flex-col justify-center" style="color: #EB5757">
-       <a href="${card.website}">
+    <div class="bg-white font-bold px-6 py-3 rounded-xl flex flex-col justify-center" style="color: #EB5757">
+       <a onclick="removeCardDetails()" href="${card.website}">
            <h3>${card.pricing[2].price}</h3>
            <h3>${card.pricing[2].plan}</h3>
        </a>
@@ -115,6 +114,31 @@ const displayCardDetails = card => {
          ${featuresListItems}
          </ul>
      </div>
+    `;
+
+    const modalRightSide = document.getElementById('modal-right-side');
+    modalRightSide.innerHTML = `
+    <div class="relative">
+       <img src="${card.image_link[0]}" class="rounded-xl" alt="" class="w-full h-auto">
+       
+       <h1 class="mt-3 mb-3 text-xl font-bold text-center">${card.input_output_examples[0].input}</h1>
+       <h1 class="text-neutral-500">${card.input_output_examples[0].output}</h1>
+    </div>
+    `;
+}
+
+const removeCardDetails = () => {
+    const remove = document.getElementById('remove');
+    remove.innerHTML = `
+    <div style="height: 600px;" class="modal-body d-flex justify-content-center align-items-center">
+    <section id="loader">
+    <div class="d-flex justify-content-center align-items-center ">
+        <div class="spinner-border" role="status">
+            <span class="visually-hidden">Loading...</span>
+        </div>
+    </div>
+</section>
+    </div>
     `;
 }
 
