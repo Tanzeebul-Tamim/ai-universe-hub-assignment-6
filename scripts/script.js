@@ -13,19 +13,19 @@ const displayCards = cards => {
       // Create feature-list items
       const featuresListItems = card.features
         .filter((feature) => feature)
-        .map((feature) => `<li style="list-style: decimal;">${feature}</li>`)
+        .map((feature) => `<li style="list-style: decimal;  margin-left: 1em;">${feature}</li>`)
         .join('');
   
       cardDiv.innerHTML = `
-        <div class="gap-5" style="border: 1px solid gray">
-          <img src="${card.image}" style="height: 300px;" alt="">
+        <div class="border border-stone-200 rounded-2xl p-4">
+          <img class="rounded-2xl" src="${card.image}" style="height: 300px;" alt="">
           <h1 class="text-2xl">Features</h1>
-          <ol id="feature-list">
+          <ol style="margin-left: 0;" id="feature-list">
             ${featuresListItems}
           </ol>
           <hr>
-          <h1 id="card-title">${card.title}</h1>
-          <h3>${card.subtitle}</h3>
+          <h1 class="text-2xl">${card.name}</h1>
+          <h3><i class="fa-regular fa-calendar"></i> ${card.published_in}</h3>
         </div>
       `;
       cardsContainer.appendChild (cardDiv);
