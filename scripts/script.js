@@ -9,7 +9,12 @@ const displayCards = (cards, dataLimit) => {
   const cardsContainer = document.getElementById("cards-container");
   cards = cards.slice(0, dataLimit);
 
- 
+  //See more button-------------------------------------------------------------
+  document.getElementById("see-more").addEventListener("click", function () {
+    cardsContainer.textContent = "";
+    loadCards();
+    this.classList.add("d-none");
+  });
 
   //Sort by date button-------------------------------------------------------------
   document
