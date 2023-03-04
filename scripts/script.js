@@ -57,29 +57,50 @@ const displayCards = (cards, dataLimit) => {
   });
 };
 
-const loadCardDetails = async id => {
-    const url = `https://openapi.programming-hero.com/api/ai/tool/${id}`;
-    const res = await fetch (url);
-    const data = await res.json ();
-    displayCardDetails(data.data);
-}
+const loadCardDetails = async (id) => {
+  const url = `https://openapi.programming-hero.com/api/ai/tool/${id}`;
+  const res = await fetch(url);
+  const data = await res.json();
+  displayCardDetails(data.data);
+  console.log(data.data)
+};
 
-const displayCardDetails = card => {
-    const modalTitle = document.getElementById('cardDetailModalLabel');
-    modalTitle.innerText = card.description;
+const displayCardDetails = (card) => {
+  const modalTitle = document.getElementById("cardDetailModalLabel");
+  modalTitle.innerText = card.description;
 
-    const pricing = document.getElementById('pricing');
-    pricing.innerHTML = `
+  const pricing = document.getElementById("pricing");
+  pricing.innerHTML = `
     <div class="bg-white font-bold px-6 py-3 rounded-xl flex flex-col justify-center" style="color: #03A30A;">
        <a onclick="removeCardDetails()" href="${card.website}">
-           <h3>${card.pricing[0].price === '0' || card.pricing[0].price === 'No cost' ? "Free of Cost" : card.   pricing[0].price}</h3>
-           <h3>${card.pricing[0].price === '0' || card.pricing[0].price === 'No cost' ? "" : card.pricing[0].plan}   </h3>
+           <h3>${
+             card.pricing[0].price === "0" ||
+             card.pricing[0].price === "No cost"
+               ? "Free of Cost"
+               : card.pricing[0].price
+           }</h3>
+           <h3>${
+             card.pricing[0].price === "0" ||
+             card.pricing[0].price === "No cost"
+               ? ""
+               : card.pricing[0].plan
+           }   </h3>
        </a>
     </div>
     <div class="bg-white font-bold px-6 py-3 rounded-xl flex flex-col justify-center" style="color: #F28927">
        <a onclick="removeCardDetails()" href="${card.website}">
-           <h3>${card.pricing[1].price === '0' || card.pricing[1].price === 'No cost' ? "Free of Cost" : card.   pricing[1].price}</h3>
-           <h3>${card.pricing[1].price === '0' || card.pricing[1].price === 'No cost' ? "" : card.pricing[1].plan}   </h3>
+           <h3>${
+             card.pricing[1].price === "0" ||
+             card.pricing[1].price === "No cost"
+               ? "Free of Cost"
+               : card.pricing[1].price
+           }</h3>
+           <h3>${
+             card.pricing[1].price === "0" ||
+             card.pricing[1].price === "No cost"
+               ? ""
+               : card.pricing[1].plan
+           }   </h3>
        </a>
     </div>
     <div class="bg-white font-bold px-6 py-3 rounded-xl flex flex-col justify-center" style="color: #EB5757">
@@ -90,22 +111,22 @@ const displayCardDetails = card => {
     </div>
     `;
 
-    const featuresListItems = card.integrations
-      .filter((feature) => feature)
-      .map(
-        (feature) =>
-          `<li class="text-neutral-500" style="list-style: disc;  margin-left: 1em;">${feature}</li>`
-      )
-      .join("");
-    
-    const featuresIntegrations = document.getElementById('features-integrations');
-    featuresIntegrations.innerHTML = `
+  const featuresListItems = card.integrations
+    .filter((feature) => feature)
+    .map(
+      (feature) =>
+        `<li class="text-neutral-500" style="list-style: disc;  margin-left: 1em;">${feature}</li>`
+    )
+    .join("");
+
+  const featuresIntegrations = document.getElementById("features-integrations");
+  featuresIntegrations.innerHTML = `
     <div>
          <h1 class="text-xl font-bold mb-3">Features</h1>
          <ul class="text-neutral-500" style="list-style: disc; margin-left: 0;">
-           <li style="margin-left: 1em;">${card.features['1']['feature_name']}</li>
-           <li style="margin-left: 1em;">${card.features['2']['feature_name']}</li>
-           <li style="margin-left: 1em;">${card.features['3']['feature_name']}</li>
+           <li style="margin-left: 1em;">${card.features["1"]["feature_name"]}</li>
+           <li style="margin-left: 1em;">${card.features["2"]["feature_name"]}</li>
+           <li style="margin-left: 1em;">${card.features["3"]["feature_name"]}</li>
          </ul>
      </div>
      <div>
@@ -116,20 +137,27 @@ const displayCardDetails = card => {
      </div>
     `;
 
-    const modalRightSide = document.getElementById('modal-right-side');
-    modalRightSide.innerHTML = `
-    <div class="relative">
-       <img src="${card.image_link[0]}" class="rounded-xl" alt="" class="w-full h-auto">
-       
-       <h1 class="mt-3 mb-3 text-xl font-bold text-center">${card.input_output_examples[0].input}</h1>
-       <h1 class="text-neutral-500">${card.input_output_examples[0].output}</h1>
-    </div>
-    `;
-}
+  const modalRightSide = document.getElementById("modal-right-side");
+  modalRightSide.innerHTML = `
+  <div class="relative">
+    <img src="${card.image_link[0]}" class="rounded-xl" alt="" class="w-full h-auto">
+    ${card.accuracy.score ?
+        `<div class="absolute top-2 right-2">
+          <p class="bg-red-500 px-2 text-md py-1 rounded-xl text-white font-medium">
+            ${(card.accuracy.score * 100)}% Accuracy
+          </p>
+        </div>` :
+        ''
+    }
+    <h1 class="mt-3 mb-3 text-xl font-bold text-center">${card.input_output_examples[0].input}</h1>
+    <h1 class="text-neutral-500 text-center">${card.input_output_examples[0].output}</h1>
+  </div>
+`;
+};
 
 const removeCardDetails = () => {
-    const remove = document.getElementById('remove');
-    remove.innerHTML = `
+  const remove = document.getElementById("remove");
+  remove.innerHTML = `
     <div style="height: 600px;" class="modal-body d-flex justify-content-center align-items-center">
     <section id="loader">
     <div class="d-flex justify-content-center align-items-center ">
@@ -140,6 +168,6 @@ const removeCardDetails = () => {
 </section>
     </div>
     `;
-}
+};
 
 loadCards(6);
